@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LGT Fitness | Lose · Gain · Transform — Online Coaching with Blake McKenzie</title>
+<meta name="description" content="Transform your body and mind with Brisbane-based Sports Nutritionist and Online Coach Blake McKenzie. Premium and Standard coaching packages. 63kg lost personally — now helping you do the same.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+/* ═══════════════════════════════════════════
+   CSS VARIABLES & RESET
+   ═══════════════════════════════════════════ */
+:root {
+  --black: #0a0a0a;
+  --black-light: #111111;
+  --black-card: #161616;
+  --black-border: #222222;
+  --charcoal: #1a1a1a;
+  --grey-dark: #2a2a2a;
+  --grey-mid: #555555;
+  --grey-light: #888888;
+  --grey-text: #b0b0b0;
+  --white: #f5f5f0;
+  --white-pure: #ffffff;
+  --amber: #e8a838;
+  --amber-bright: #f0b840;
+  --amber-dark: #c48820;
+  --amber-glow: rgba(232, 168, 56, 0.15);
+  --red-accent: #d44030;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --nav-height: 72px;
+  --section-pad: clamp(80px, 10vw, 140px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--grey-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; font-family: var(--font-body); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.nav-logo .logo-lgt {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1;
+  position: relative;
+}
+
+.nav-logo .logo-lgt::after {
+  content: '';
+  position: absolute;
+  bottom: 1px; left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--amber);
+}
+
+.nav-logo .logo-dot {
+  width: 5px; height: 5px;
+  background: var(--amber);
+  border-radius: 50%;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.nav-logo .logo-fitness {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: #666;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--amber);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--amber);
+  color: var(--black) !important;
+  padding: 10px 24px;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  border-radius: 0;
+  transition: background 0.3s, transform 0.2s !important;
+}
+
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--amber-bright); transform: translateY(-1px); }
+
+/* Mobile Menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232, 168, 56, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(232, 168, 56, 0.03) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 800px; height: 800px;
+  border: 1px solid rgba(232, 168, 56, 0.06);
+  border-radius: 50%;
+  z-index: 1;
+  animation: heroOrb 20s ease-in-out infinite;
+}
+
+@keyframes heroOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.05); }
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 140px 0 80px;
+}
+
+.hero-content { max-width: 580px; }
+
+.hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--amber);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 0.95;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--white);
+  color: transparent;
+}
+
+.hero h1 .amber {
+  color: var(--amber);
+}
+
+.hero-desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--grey-light);
+  margin-bottom: 40px;
+  max-width: 460px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--amber);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--amber-bright);
+  transform: translateX(-101%);
+  transition: transform 0.4s;
+}
+
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232, 168, 56, 0.25); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border: 1px solid var(--grey-dark);
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  overflow: visible;
+  border: 1px solid var(--black-border);
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-image-wrapper::before {
+  display: none;
+}
+
+.hero-image-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--charcoal), var(--grey-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 120px;
+  color: rgba(232, 168, 56, 0.15);
+  letter-spacing: 8px;
+  overflow: hidden;
+}
+
+.hero-stat-float {
+  position: absolute;
+  bottom: -28px; right: -28px;
+  background: var(--amber);
+  padding: 24px 32px;
+  z-index: 3;
+}
+
+.hero-stat-float .number {
+  font-family: var(--font-display);
+  font-size: 52px;
+  color: var(--black);
+  line-height: 1;
+}
+
+.hero-stat-float .label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--black);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   STATS BAR
+   ═══════════════════════════════════════════ */
+.stats-bar {
+  background: var(--black-light);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+  padding: 48px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.stat-item .stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 56px);
+  color: var(--white);
+  line-height: 1;
+}
+
+.stat-item .stat-number .amber { color: var(--amber); }
+
+.stat-item .stat-label {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADERS
+   ═══════════════════════════════════════════ */
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--amber);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 17px;
+  color: var(--grey-light);
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT SECTION
+   ═══════════════════════════════════════════ */
+.about {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%; height: 100%;
+  background: linear-gradient(to right, rgba(232, 168, 56, 0.02), transparent);
+  pointer-events: none;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-image-main {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, var(--charcoal), var(--grey-dark));
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image-main .placeholder-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: rgba(232, 168, 56, 0.1);
+}
+
+.about-accent-box {
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 200px;
+  padding: 28px;
+  background: var(--amber);
+  color: var(--black);
+  z-index: 2;
+}
+
+.about-accent-box .big-number {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+}
+
+.about-accent-box .accent-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.about-content .about-text {
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.about-text:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  float: left;
+  line-height: 0.8;
+  margin-right: 12px;
+  margin-top: 8px;
+  color: var(--amber);
+}
+
+.about-quote {
+  border-left: 3px solid var(--amber);
+  padding: 20px 0 20px 28px;
+  margin: 32px 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--white);
+  line-height: 1.6;
+}
+
+.about-credentials {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.credential {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--grey-light);
+}
+
+.credential .icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--amber);
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+   ═══════════════════════════════════════════ */
+.how-it-works {
+  padding: var(--section-pad) 0;
+  background: var(--black-light);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  counter-reset: step;
+  position: relative;
+}
+
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 44px; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--black-border), var(--black-border), transparent);
+}
+
+.step-card {
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+}
+
+.step-number {
+  width: 88px; height: 88px;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--amber);
+  border: 1px solid var(--black-border);
+  background: var(--black-light);
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s;
+}
+
+.step-card:hover .step-number {
+  border-color: var(--amber);
+  box-shadow: 0 0 40px rgba(232, 168, 56, 0.1);
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.step-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--grey-light);
+}
+
+/* ═══════════════════════════════════════════
+   PRICING SECTION
+   ═══════════════════════════════════════════ */
+.pricing {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+
+.pricing::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 168, 56, 0.04), transparent 70%);
+  pointer-events: none;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.price-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 40px 28px;
+  position: relative;
+  transition: all 0.4s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grey-dark);
+  transition: background 0.4s;
+}
+
+.price-card:hover {
+  border-color: rgba(232, 168, 56, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.price-card:hover::before { background: var(--amber); }
+
+.price-card.featured {
+  border-color: rgba(232, 168, 56, 0.3);
+  transform: scale(1.03);
+  z-index: 2;
+}
+
+.price-card.featured::before { background: var(--amber); height: 4px; }
+
+.price-card.featured:hover {
+  transform: scale(1.03) translateY(-4px);
+}
+
+.price-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: var(--amber);
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+}
+
+.price-tier {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.price-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  min-height: 62px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.price-toggle-spacer {
+  height: 42px;
+  margin-bottom: 16px;
+}
+
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.price-dollar {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.price-period {
+  font-size: 13px;
+  color: var(--grey-mid);
+}
+
+.price-note {
+  font-size: 12px;
+  color: var(--grey-mid);
+  margin-bottom: 24px;
+}
+
+.price-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--black-border);
+  margin: 20px 0;
+}
+
+.price-includes-tag {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  background: rgba(232, 168, 56, 0.06);
+  border: 1px solid rgba(232, 168, 56, 0.12);
+  display: inline-block;
+}
+
+.price-features {
+  list-style: none;
+  margin-bottom: 28px;
+  flex-grow: 1;
+}
+
+.price-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.5;
+}
+
+.price-features li .check {
+  color: var(--amber);
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.price-commitment {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* Billing Toggle */
+.billing-toggle {
+  display: flex;
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--grey-mid);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.toggle-btn.active {
+  background: var(--amber);
+  color: var(--black);
+}
+
+.toggle-btn:not(.active):hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.03);
+}
+
+.save-tag {
+  font-size: 8px;
+  background: rgba(232, 168, 56, 0.15);
+  color: var(--amber);
+  padding: 2px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+.toggle-btn.active .save-tag {
+  background: rgba(0,0,0,0.15);
+  color: var(--black);
+}
+
+.price-card .btn-primary,
+.price-card .btn-outline {
+  width: 100%;
+  justify-content: center;
+}
+
+.onboarding-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 14px;
+  color: var(--grey-mid);
+}
+
+/* ═══════════════════════════════════════════
+   COMPARISON TABLE
+   ═══════════════════════════════════════════ */
+.comparison {
+  padding: 80px 0 var(--section-pad);
+}
+
+.comparison-table-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.comparison-table thead th {
+  padding: 20px 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--white);
+  border-bottom: none;
+  background: var(--black-card);
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 10;
+}
+
+.comparison-table thead th:first-child {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  font-weight: 600;
+  width: 35%;
+}
+
+.comparison-table thead th.featured-col {
+  background: #1e1812;
+}
+
+.comparison-table thead th .th-price {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--grey-mid);
+  font-weight: 400;
+  margin-top: 4px;
+  letter-spacing: 0;
+}
+
+.comparison-table tbody tr {
+  transition: background 0.2s;
+}
+
+.comparison-table tbody tr:first-child td {
+  padding-top: 28px;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(255,255,255,0.015);
+}
+
+.comparison-table tbody tr.section-row td {
+  padding: 16px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  background: rgba(232, 168, 56, 0.03);
+}
+
+.comparison-table tbody td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--grey-text);
+  vertical-align: top;
+}
+
+.comparison-table tbody td:first-child {
+  color: var(--grey-text);
+}
+
+.comparison-table tbody td:not(:first-child) {
+  text-align: center;
+}
+
+.comparison-table tbody td.featured-col {
+  background: #110f0b;
+}
+
+.feature-name {
+  color: var(--white);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+.feature-detail {
+  font-size: 12px;
+  color: var(--grey-mid);
+  line-height: 1.5;
+}
+
+.tick {
+  color: var(--amber);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cross {
+  color: var(--grey-dark);
+  font-size: 18px;
+}
+
+.comparison-cta-row td {
+  padding: 28px 16px !important;
+  border-bottom: none !important;
+}
+
+.comparison-cta-row .btn-primary,
+.comparison-cta-row .btn-outline {
+  padding: 12px 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.comparison-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--black-border);
+}
+
+.comparison-footer p {
+  font-size: 13px;
+  color: var(--grey-mid);
+  margin-bottom: 8px;
+}
+
+.stripe-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--grey-mid);
+  margin-top: 12px;
+}
+
+.stripe-inline-badge svg {
+  width: 36px;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════
+   APP / SELF-SERVICE SECTION
+   ═══════════════════════════════════════════ */
+.app-section {
+  padding: var(--section-pad) 0;
+  background: var(--black-light);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.app-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 36px 0;
+}
+
+.app-feature {
+  padding: 24px;
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  transition: border-color 0.3s;
+}
+
+.app-feature:hover { border-color: rgba(232, 168, 56, 0.2); }
+
+.app-feature .feature-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.app-feature .feature-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.app-feature .feature-desc {
+  font-size: 13px;
+  color: var(--grey-mid);
+  line-height: 1.6;
+}
+
+.app-pricing-inline {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.app-price-option {
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  padding: 20px 28px;
+  flex: 1;
+  min-width: 180px;
+  transition: border-color 0.3s;
+}
+
+.app-price-option:hover { border-color: var(--amber); }
+
+.app-price-option .price-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-bottom: 4px;
+}
+
+.app-price-option .price-val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--white);
+}
+
+.app-price-option .price-sub {
+  font-size: 12px;
+  color: var(--grey-mid);
+}
+
+.app-mockup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.app-phone-img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5));
+}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════════════ */
+.testimonials {
+  padding: var(--section-pad) 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.testimonial-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 40px 32px;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(232, 168, 56, 0.15);
+  transform: translateY(-4px);
+}
+
+.testimonial-card::before {
+  content: '"';
+  font-family: var(--font-serif);
+  font-size: 80px;
+  color: rgba(232, 168, 56, 0.15);
+  position: absolute;
+  top: 16px; left: 24px;
+  line-height: 1;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  color: var(--amber);
+  font-size: 14px;
+}
+
+.testimonial-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--grey-text);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  background: var(--grey-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--amber);
+}
+
+.testimonial-name {
+  font-weight: 600;
+  color: var(--white);
+  font-size: 14px;
+}
+
+.testimonial-meta {
+  font-size: 12px;
+  color: var(--grey-mid);
+}
+
+/* ═══════════════════════════════════════════
+   FREE RESOURCES / EMAIL CAPTURE
+   ═══════════════════════════════════════════ */
+.resources {
+  padding: var(--section-pad) 0;
+  background: var(--black-light);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+}
+
+.resources-card {
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.resources-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232, 168, 56, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.resources-content .resources-badge {
+  display: inline-block;
+  background: rgba(232, 168, 56, 0.1);
+  color: var(--amber);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  margin-bottom: 20px;
+}
+
+.resources-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.resources-desc {
+  font-size: 16px;
+  color: var(--grey-light);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.resources-items {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.resource-item .icon {
+  color: var(--amber);
+  font-size: 16px;
+}
+
+.email-form {
+  display: flex;
+  gap: 0;
+}
+
+.email-form input {
+  flex: 1;
+  padding: 16px 20px;
+  background: var(--charcoal);
+  border: 1px solid var(--black-border);
+  border-right: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.email-form input::placeholder { color: var(--grey-mid); }
+.email-form input:focus { border-color: var(--amber); }
+
+.email-form button {
+  background: var(--amber);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+.email-form button:hover { background: var(--amber-bright); }
+
+.resources-visual {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.guide-mockup {
+  width: 260px;
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 32px;
+  transform: rotate(-3deg);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.guide-mockup .guide-badge {
+  background: var(--amber);
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.guide-mockup .guide-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.guide-mockup .guide-sub {
+  font-size: 12px;
+  color: var(--grey-mid);
+  margin-bottom: 20px;
+}
+
+.guide-mockup .guide-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-mockup .guide-line {
+  height: 6px;
+  background: var(--grey-dark);
+  border-radius: 3px;
+}
+
+.guide-mockup .guide-line:nth-child(2) { width: 80%; }
+.guide-mockup .guide-line:nth-child(3) { width: 60%; }
+
+/* ═══════════════════════════════════════════
+   APPLICATION / CONTACT FORM
+   ═══════════════════════════════════════════ */
+.apply {
+  padding: var(--section-pad) 0;
+}
+
+.apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.apply-content .apply-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.apply-content .apply-desc {
+  font-size: 16px;
+  color: var(--grey-light);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.apply-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.apply-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.apply-benefit .benefit-icon {
+  width: 44px; height: 44px;
+  flex-shrink: 0;
+  border: 1px solid var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--amber);
+  font-size: 18px;
+}
+
+.apply-benefit .benefit-text {
+  font-size: 15px;
+  color: var(--grey-text);
+  line-height: 1.7;
+}
+
+.apply-benefit .benefit-text strong {
+  color: var(--white);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.apply-contact-info {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--black-border);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.contact-item .icon { color: var(--amber); }
+
+.contact-item a {
+  color: var(--grey-text);
+  transition: color 0.3s;
+}
+
+.contact-item a:hover { color: var(--amber); }
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.social-link {
+  width: 44px; height: 44px;
+  border: 1px solid var(--black-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey-light);
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.social-link:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* Form */
+.apply-form {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 48px;
+}
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--amber);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--grey-mid);
+}
+
+.form-submit {
+  width: 100%;
+  background: var(--amber);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+
+.form-submit:hover {
+  background: var(--amber-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(232, 168, 56, 0.2);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--black-border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .footer-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-brand .footer-logo .logo-lgt {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1;
+  position: relative;
+}
+
+.footer-brand .footer-logo .logo-lgt::after {
+  content: '';
+  position: absolute;
+  bottom: 1px; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--amber);
+}
+
+.footer-brand .footer-logo .logo-dot {
+  width: 6px; height: 6px;
+  background: var(--amber);
+  border-radius: 50%;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.footer-brand .footer-logo .logo-fitness {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  color: #666;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.footer-brand .footer-desc {
+  font-size: 14px;
+  color: var(--grey-mid);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+.footer-col .footer-heading {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.footer-col .footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col .footer-links a {
+  font-size: 14px;
+  color: var(--grey-mid);
+  transition: color 0.3s;
+}
+
+.footer-col .footer-links a:hover { color: var(--amber); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--black-border);
+  font-size: 13px;
+  color: var(--grey-mid);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-image { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { order: -1; max-width: 400px; }
+  .app-grid { grid-template-columns: 1fr; gap: 48px; }
+  .app-mockup { order: -1; }
+  .apply-grid { grid-template-columns: 1fr; gap: 48px; }
+  .resources-card { grid-template-columns: 1fr; padding: 40px; }
+  .resources-visual { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .price-card.featured { transform: none; }
+  .price-card.featured:hover { transform: translateY(-4px); }
+  .price-name { min-height: unset; }
+  .price-toggle-spacer { display: none; }
+  .comparison-table { min-width: 600px; }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-height: 64px; }
+  
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-height); left: 0; right: 0; bottom: 0;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 40px 24px;
+    gap: 24px;
+    align-items: flex-start;
+    z-index: 999;
+  }
+  .nav-links.open a { font-size: 20px; }
+  .nav-toggle { display: flex; }
+  
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .steps-grid { grid-template-columns: 1fr; gap: 48px; }
+  .steps-grid::before { display: none; }
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .form-row { grid-template-columns: 1fr; }
+  .app-features { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { justify-content: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .resources-items { flex-direction: column; }
+  .email-form { flex-direction: column; }
+  .email-form input { border-right: 1px solid var(--black-border); }
+  .apply-form { padding: 32px 24px; }
+  .about-accent-box { position: relative; bottom: 0; right: 0; width: 100%; margin-top: -1px; }
+  .hero-stat-float { bottom: -20px; right: -8px; padding: 16px 20px; }
+  .hero-stat-float .number { font-size: 40px; }
+  .comparison { padding: 60px 0 80px; }
+  .comparison-table thead th { font-size: 14px; padding: 14px 10px; }
+  .comparison-table thead th .th-price { font-size: 10px; }
+  .comparison-table tbody td { padding: 10px 8px; font-size: 12px; }
+  .feature-name { font-size: 13px; }
+  .feature-detail { font-size: 11px; }
+  .comparison-table tbody tr.section-row td { font-size: 13px; padding: 12px 8px; }
+  .section-header { margin-bottom: 48px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 44px; }
+  .section-title { font-size: 32px; }
+  .app-pricing-inline { flex-direction: column; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .stat-item .stat-number { font-size: 36px; }
+  .stat-item .stat-label { font-size: 10px; }
+  .price-card { padding: 32px 20px; }
+  .comparison-table { min-width: 520px; }
+  .comparison-table thead th { font-size: 12px; padding: 12px 6px; }
+  .comparison-table thead th:first-child { width: 30%; }
+  .about-credentials { flex-direction: column; gap: 16px; }
+  .step-number { width: 72px; height: 72px; font-size: 28px; }
+  .resources-card { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#hero" class="nav-logo"><span class="logo-lgt">LGT</span><span class="logo-dot"></span><span class="logo-fitness">FITNESS</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#process" onclick="closeNav()">Process</a></li>
+      <li><a href="#coaching" onclick="closeNav()">Coaching</a></li>
+      <li><a href="#app" onclick="closeNav()">App</a></li>
+      <li><a href="#results" onclick="closeNav()">Results</a></li>
+      <li><a href="#apply" class="nav-cta" onclick="closeNav()">APPLY NOW</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Brisbane-Based Online Coach</div>
+        <h1>
+          <span class="outline">LOSE.</span><br>
+          <span class="outline">GAIN.</span><br>
+          <span class="amber">TRANSFORM.</span>
+        </h1>
+        <p class="hero-desc">
+          Sports Nutritionist &amp; Online Coach Blake McKenzie has personally lost 63kg and now helps everyday Australians achieve lasting body transformations through structured coaching, custom nutrition, and zero BS.
+        </p>
+        <div class="hero-actions">
+          <a href="#coaching" class="btn-primary"><span>VIEW COACHING PLANS</span></a>
+          <a href="#about" class="btn-outline">BLAKE'S STORY →</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-wrapper">
+          <img src="blake-transformation.jpg" alt="Blake McKenzie — 63kg transformation before and after">
+          <div class="hero-stat-float">
+            <div class="number">63<span style="font-size:24px">kg</span></div>
+            <div class="label">Personal weight loss</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════ -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">63<span class="amber">kg</span></div>
+        <div class="stat-label">Personal transformation</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">ISSN</div>
+        <div class="stat-label">Sports Nutritionist</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">12<span class="amber">+</span></div>
+        <div class="stat-label">Years in fitness</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">100<span class="amber">%</span></div>
+        <div class="stat-label">Individualised approach</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ABOUT
+     ═══════════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-image-main">
+          <img src="blake-portrait.jpeg" alt="Blake McKenzie — LGT Fitness Coach" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="about-accent-box">
+          <div class="big-number">130→67</div>
+          <div class="accent-label">kg transformation</div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-header">
+          <div class="section-eyebrow">Meet Your Coach</div>
+          <h2 class="section-title">BLAKE<br>MCKENZIE</h2>
+        </div>
+        <p class="about-text reveal">
+          My name is Blake McKenzie — I'm a Brisbane-based online coach, ISSN Sports Nutritionist, and the founder of LGT Fitness. I wasn't always fit. Growing up, I ate takeaway 4–5 times a week and spent my time gaming. By the end of Year 11, I weighed 105kg. During an 8-week school holiday binge, I gained another 25kg — hitting 130kg.
+        </p>
+        <p class="about-text reveal">
+          That moment on the scales changed everything. I decided to take control, joined a gym, and over the years transformed my entire life — physically and mentally. I went on to lose 63kg in total and fell in love with helping others do the same.
+        </p>
+        <blockquote class="about-quote reveal">
+          "Motivation comes and goes. Discipline stays with you forever."
+        </blockquote>
+        <p class="about-text reveal">
+          Today, I use my personal experience and professional qualifications to guide individuals through their own transformations. No cookie-cutter plans. No one-size-fits-all. Just real, honest coaching built around you — your goals, your body, your life.
+        </p>
+        <div class="about-credentials reveal">
+          <div class="credential">
+            <div class="icon">✦</div>
+            ISSN Sports Nutritionist
+          </div>
+          <div class="credential">
+            <div class="icon">✦</div>
+            Certified Personal Trainer
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════════ -->
+<section class="how-it-works" id="process">
+  <div class="container">
+    <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 64px;">
+      <div class="section-eyebrow" style="justify-content:center;">
+        <span style="display:none;"></span>The Process
+      </div>
+      <h2 class="section-title" style="margin-bottom:16px;">HOW IT WORKS</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Three simple steps from where you are now to where you want to be. No guesswork, no confusion — just structured support.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-number">01</div>
+        <h3 class="step-title">APPLY &amp; CONSULT</h3>
+        <p class="step-desc">Fill out the application form so I can understand your goals, history, and current situation. We'll have an initial consultation to make sure we're the right fit.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-number">02</div>
+        <h3 class="step-title">CUSTOM PLAN</h3>
+        <p class="step-desc">You'll receive a custom training program and nutrition plan (or macros) tailored specifically to you — delivered through the LGT Fitness app with full guidance.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-number">03</div>
+        <h3 class="step-title">COACH &amp; ADAPT</h3>
+        <p class="step-desc">Through regular check-ins, I'll monitor your progress, adjust your program as needed, and keep you accountable every step of the way. Real coaching, real results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PRICING
+     ═══════════════════════════════════════════ -->
+<section class="pricing" id="coaching">
+  <div class="container">
+    <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 64px;">
+      <div class="section-eyebrow" style="justify-content:center;">
+        <span style="display:none;"></span>Online Coaching
+      </div>
+      <h2 class="section-title">COACHING PLANS</h2>
+      <p class="section-subtitle" style="margin:0 auto;">From self-guided programs to full 1-on-1 coaching with personalised nutrition. Choose the level of support that fits your goals.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- ── SELF-GUIDED ── -->
+      <div class="price-card reveal">
+        <div class="price-tier">Self-Guided</div>
+        <div class="price-name">STANDARD</div>
+        <div class="billing-toggle">
+          <button class="toggle-btn active" data-billing="monthly" onclick="switchBilling('monthly')">Monthly</button>
+          <button class="toggle-btn" data-billing="annual" onclick="switchBilling('annual')">Annual <span class="save-tag">Save 17%</span></button>
+        </div>
+        <div class="price-amount" id="standardPrice">
+          <span class="price-dollar" id="standardDollar">$50</span>
+          <span class="price-period" id="standardPeriod">AUD / month</span>
+        </div>
+        <div class="price-note" id="standardNote">3 days free trial</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><span class="check">✦</span> 4 structured training programs</li>
+          <li><span class="check">✦</span> High-protein recipe collection</li>
+          <li><span class="check">✦</span> Macro calculator</li>
+          <li><span class="check">✦</span> Nutrition &amp; training guides</li>
+          <li><span class="check">✦</span> Full LGT App access</li>
+        </ul>
+        <a href="https://lgtfitness.programs.app/" target="_blank" class="btn-outline" style="width:100%;justify-content:center;">START FREE TRIAL</a>
+        <div class="price-commitment" id="standardCommitment">$50 AUD billed monthly</div>
+      </div>
+
+      <!-- ── ONLINE COACHING ── -->
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-tier">1-on-1 Coaching</div>
+        <div class="price-name">ONLINE COACHING</div>
+        <div class="price-toggle-spacer"></div>
+        <div class="price-amount">
+          <span class="price-dollar">$69.95</span>
+          <span class="price-period">AUD / week</span>
+        </div>
+        <div class="price-note">12 week minimum commitment</div>
+        <div class="price-divider"></div>
+        <div class="price-includes-tag">Everything in Standard +</div>
+        <ul class="price-features">
+          <li><span class="check">✦</span> Custom training program for your goals</li>
+          <li><span class="check">✦</span> 4×4 week blocks that ramp with difficulty</li>
+          <li><span class="check">✦</span> Delivered via the LGT training app</li>
+          <li><span class="check">✦</span> Accountability systems &amp; check-ins</li>
+          <li><span class="check">✦</span> Direct coach support via WhatsApp</li>
+          <li><span class="check">✦</span> Client education series &amp; resources</li>
+        </ul>
+        <a href="#apply" class="btn-outline" style="width:100%;justify-content:center;">APPLY NOW</a>
+        <div class="price-commitment">12 week minimum commitment</div>
+      </div>
+
+      <!-- ── ONLINE COACHING + NUTRITION ── -->
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">1-on-1 Coaching</div>
+        <div class="price-name">ONLINE COACHING<br>+ NUTRITION</div>
+        <div class="price-toggle-spacer"></div>
+        <div class="price-amount">
+          <span class="price-dollar">$89.95</span>
+          <span class="price-period">AUD / week</span>
+        </div>
+        <div class="price-note">12 week minimum commitment</div>
+        <div class="price-divider"></div>
+        <div class="price-includes-tag">Everything in Online Coaching +</div>
+        <ul class="price-features">
+          <li><span class="check">✦</span> Initial nutrition consultation (30 mins)</li>
+          <li><span class="check">✦</span> Custom meal plan / macro plan</li>
+          <li><span class="check">✦</span> Weekly nutrition adjustments</li>
+          <li><span class="check">✦</span> Food swaps &amp; supplement protocols</li>
+          <li><span class="check">✦</span> Fluid &amp; step targets</li>
+        </ul>
+        <a href="#apply" class="btn-primary" style="width:100%;justify-content:center;"><span>APPLY NOW</span></a>
+        <div class="price-commitment">12 week minimum commitment</div>
+      </div>
+
+    </div>
+    <p class="onboarding-note">All 1-on-1 coaching plans include a one-time $100 AUD setup fee. All prices are exclusive of a 1.7% Stripe processing fee.</p>
+
+    <!-- ═══════════════════════════════════════
+         COMPARISON TABLE
+         ═══════════════════════════════════════ -->
+    <div class="comparison" id="compare">
+      <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 48px;">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span style="display:none;"></span>Service Breakdown
+        </div>
+        <h2 class="section-title">WHAT'S INCLUDED</h2>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>STANDARD<br><span class="th-price">$50/mo or $500/yr</span></th>
+              <th>ONLINE COACHING<br><span class="th-price">$69.95/week</span></th>
+              <th class="featured-col">COACHING + NUTRITION<br><span class="th-price">$89.95/week</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- PROGRAMMING -->
+            <tr class="section-row"><td colspan="4">PROGRAMMING</td></tr>
+            <tr>
+              <td>
+                <span class="feature-name">Training Programs</span>
+                <span class="feature-detail">Pre-built programs to follow at your own pace</span>
+              </td>
+              <td><span class="tick">✓</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Custom Training Program</span>
+                <span class="feature-detail">Personalised program designed to suit your specific goals</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">4×4 Week Training Blocks</span>
+                <span class="feature-detail">Progressive blocks that ramp with difficulty over time</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">LGT Training App</span>
+                <span class="feature-detail">Delivered to your phone with workout videos, instructions &amp; directions</span>
+              </td>
+              <td><span class="tick">✓</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Recipe Collection</span>
+                <span class="feature-detail">High-protein recipes and nutrition tracking guides</span>
+              </td>
+              <td><span class="tick">✓</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Macro Calculator</span>
+                <span class="feature-detail">Calculate your macros based on your body and goals</span>
+              </td>
+              <td><span class="tick">✓</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+
+            <!-- COACHING -->
+            <tr class="section-row"><td colspan="4">COACHING</td></tr>
+            <tr>
+              <td>
+                <span class="feature-name">Accountability Systems</span>
+                <span class="feature-detail">Randomised spot checks, check-in forms &amp; video feedback</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Body Composition Reviews</span>
+                <span class="feature-detail">End of training block body composition analysis</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Support System</span>
+                <span class="feature-detail">Direct messaging via WhatsApp · 8am–5pm Mon–Sat</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Goal Setting &amp; Planning</span>
+                <span class="feature-detail">Short-term goal setting and structured planning sessions</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Client Education Series</span>
+                <span class="feature-detail">Training, supplement &amp; nutrition guides to accelerate your fitness</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="tick">✓</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+
+            <!-- NUTRITION -->
+            <tr class="section-row"><td colspan="4">NUTRITION</td></tr>
+            <tr>
+              <td>
+                <span class="feature-name">Initial Consultation</span>
+                <span class="feature-detail">30-minute deep dive into your nutrition, habits &amp; goals</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Custom Meal / Macro Plan</span>
+                <span class="feature-detail">Tailored plan built around your lifestyle and preferences</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Weekly Nutrition Adjustments</span>
+                <span class="feature-detail">Ongoing adjustments based on your progress and feedback</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Food Swaps</span>
+                <span class="feature-detail">Alternative food options to keep variety and adherence high</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Supplement Protocols</span>
+                <span class="feature-detail">Evidence-based supplement recommendations for your goals</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="feature-name">Fluid &amp; Step Targets</span>
+                <span class="feature-detail">Daily hydration and activity targets for overall health</span>
+              </td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td class="featured-col"><span class="tick">✓</span></td>
+            </tr>
+
+            <!-- CTA ROW -->
+            <tr class="comparison-cta-row">
+              <td></td>
+              <td><a href="https://lgtfitness.programs.app/" target="_blank" class="btn-outline" style="font-size:11px;padding:12px 16px;">FREE TRIAL</a></td>
+              <td><a href="#apply" class="btn-outline" style="font-size:11px;padding:12px 16px;">APPLY</a></td>
+              <td class="featured-col"><a href="#apply" class="btn-primary" style="font-size:11px;padding:12px 16px;"><span>APPLY</span></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="comparison-footer">
+        <p>All 1-on-1 coaching plans require a 12-week minimum commitment and a one-time $100 AUD setup fee.</p>
+        <p>Prices shown are exclusive of a 1.7% Stripe processing fee. Weekly subscriptions can be cancelled after your commitment period.</p>
+        <div class="stripe-inline-badge">
+          <svg viewBox="0 0 60 25" fill="currentColor"><path d="M5 4.2C5 3 5.8 2.4 7.2 2.4c2 0 4.4.6 6.4 1.8V.5C11.5-.2 9.4-.5 7.2-.5 2.9-.5 0 1.7 0 5c0 5 6.8 4.2 6.8 6.3 0 1.4-1.2 1.9-2.8 1.9-2.4 0-5.5-1-8-2.4v3.8c2.7 1.2 5.4 1.7 8 1.7 4.4 0 7.4-2.2 7.4-5.4C11.4 5.4 5 6.3 5 4.2zm14.7-2h3.2v12.1h-3.2V2.2zm0-1.8h3.2v-2h-3.2v2zm7.2 3.8l-.2-2H24v16.6h3.2V9c.8-1 2-1.2 2.8-1.2.3 0 .6 0 .9.1V4.6c-.3-.1-.7-.1-1-.1-1.4 0-2.6.8-3 2zm7.2-2h3.2v12.1h-3.2V2.2zm0-1.8h3.2v-2h-3.2v2zm14 1.5v-.8h-3.1v12.4h3.2V7c.7-1.3 2-1.6 3.3-1.6h.1V2.2c-1.4 0-2.8.6-3.5 1.7zm13.2-.4c-1.2-.8-2.6-1.3-4.2-1.3-3.6 0-6.3 2.7-6.3 6.3s2.6 6.3 6.1 6.3c1.7 0 3-.5 4.3-1.4V8.4c-1.2 1-2.5 1.6-4 1.6-1.9 0-3.2-1.2-3.2-3.5s1.3-3.5 3.2-3.5c1.5 0 2.7.6 4 1.5V1.5z"/></svg>
+          Secure payments powered by Stripe
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     APP / SELF-SERVICE
+     ═══════════════════════════════════════════ -->
+<section class="app-section" id="app">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-content">
+        <div class="section-header">
+          <div class="section-eyebrow">Self-Guided Option</div>
+          <h2 class="section-title">THE LGT<br>FITNESS APP</h2>
+          <p class="section-subtitle">Not ready for 1-on-1 coaching? Get access to structured programs, recipes, a macro calculator and resources — all self-guided through the LGT Fitness app powered by MyStrengthBook.</p>
+        </div>
+        <div class="app-features reveal">
+          <div class="app-feature">
+            <div class="feature-icon">🏋️</div>
+            <div class="feature-title">4 PROGRAMS</div>
+            <div class="feature-desc">Structured training programs to follow at your own pace</div>
+          </div>
+          <div class="app-feature">
+            <div class="feature-icon">🍽️</div>
+            <div class="feature-title">RECIPES</div>
+            <div class="feature-desc">High-protein recipe collection for every meal</div>
+          </div>
+          <div class="app-feature">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">MACRO CALC</div>
+            <div class="feature-desc">Calculate your macros based on your goals</div>
+          </div>
+          <div class="app-feature">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">RESOURCES</div>
+            <div class="feature-desc">Guides and educational content to build knowledge</div>
+          </div>
+        </div>
+        <div class="app-pricing-inline reveal">
+          <div class="app-price-option">
+            <div class="price-label">Monthly</div>
+            <div class="price-val">$50</div>
+            <div class="price-sub">AUD / month · 3 days free</div>
+          </div>
+          <div class="app-price-option">
+            <div class="price-label">Annual · Save 17%</div>
+            <div class="price-val">$500</div>
+            <div class="price-sub">AUD / year ($41.67/mo) · 3 days free</div>
+          </div>
+        </div>
+        <div style="margin-top:28px;" class="reveal">
+          <a href="https://lgtfitness.programs.app/" target="_blank" class="btn-primary"><span>START FREE TRIAL →</span></a>
+        </div>
+      </div>
+      <div class="app-mockup reveal">
+        <img src="app-screenshot.png" alt="LGT Fitness App — Daily Dashboard" class="app-phone-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════════════ -->
+<section class="testimonials" id="results">
+  <div class="container">
+    <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 64px;">
+      <div class="section-eyebrow" style="justify-content:center;">
+        <span style="display:none;"></span>Real People, Real Results
+      </div>
+      <h2 class="section-title">CLIENT RESULTS</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Don't just take my word for it. Here's what clients have to say about their experience with LGT Fitness coaching.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">Blake helped me identify all of my bad habits and provided a solution to fix them. He gave me personal advice on how to maintain a proper diet and workout program. I have no doubt that his coaching will help others in the future.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">B</div>
+          <div>
+            <div class="testimonial-name">Blair</div>
+            <div class="testimonial-meta">Online Coaching Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">The structure and accountability Blake provides is second to none. For the first time, I actually understand nutrition and can see the progress week over week. This isn't just a plan — it's an education that lasts a lifetime.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Matt</div>
+            <div class="testimonial-meta">Premium Coaching Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">I was nervous to start but Blake made the whole process comfortable and easy to follow. The fact that he's been through a massive transformation himself means he actually gets it. Best decision I've made for my health.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah</div>
+            <div class="testimonial-meta">Standard Coaching Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FREE RESOURCES
+     ═══════════════════════════════════════════ -->
+<section class="resources" id="free">
+  <div class="container">
+    <div class="resources-card">
+      <div class="resources-content">
+        <div class="resources-badge">FREE DOWNLOAD</div>
+        <h2 class="resources-title">GET MY FREE<br>NUTRITION GUIDES</h2>
+        <p class="resources-desc">Join the LGT Fitness community and get instant access to my Flexible Eating Guide and High Protein Recipe Pack — completely free. No strings attached.</p>
+        <div class="resources-items">
+          <div class="resource-item"><span class="icon">✦</span> Flexible Eating Guide</div>
+          <div class="resource-item"><span class="icon">✦</span> High Protein Recipe Pack</div>
+        </div>
+        <div class="email-form" id="emailForm">
+          <input type="email" id="emailInput" placeholder="Enter your email address" required>
+          <button type="button" onclick="handleEmailSignup()">GET FREE ACCESS</button>
+        </div>
+        <p id="emailSuccess" style="display:none; margin-top:12px; color:var(--amber); font-size:14px;">✓ Check your inbox! Your guides are on the way.</p>
+      </div>
+      <div class="resources-visual">
+        <div class="guide-mockup">
+          <div class="guide-badge">FREE</div>
+          <div class="guide-title">FLEXIBLE EATING GUIDE</div>
+          <div class="guide-sub">by Blake McKenzie · LGT Fitness</div>
+          <div class="guide-lines">
+            <div class="guide-line"></div>
+            <div class="guide-line"></div>
+            <div class="guide-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     APPLICATION FORM
+     ═══════════════════════════════════════════ -->
+<section class="apply" id="apply">
+  <div class="container">
+    <div class="apply-grid">
+      <div class="apply-content reveal">
+        <div class="section-eyebrow">Start Your Journey</div>
+        <h2 class="apply-title">READY TO<br>TRANSFORM?</h2>
+        <p class="apply-desc">Having a coach who has personally experienced what you're wanting to achieve is the best source of guidance you can have by your side. Fill out the form and let's get started.</p>
+        <div class="apply-benefits">
+          <div class="apply-benefit">
+            <div class="benefit-icon">→</div>
+            <div class="benefit-text">
+              <strong>No cookie-cutter plans</strong>
+              Every program is built around your individual goals, body, and lifestyle.
+            </div>
+          </div>
+          <div class="apply-benefit">
+            <div class="benefit-icon">→</div>
+            <div class="benefit-text">
+              <strong>Education, not just instructions</strong>
+              You'll understand the why behind every decision — building habits that last.
+            </div>
+          </div>
+          <div class="apply-benefit">
+            <div class="benefit-icon">→</div>
+            <div class="benefit-text">
+              <strong>Real accountability</strong>
+              Regular check-ins, honest feedback, and someone in your corner every step.
+            </div>
+          </div>
+        </div>
+        <div class="apply-contact-info">
+          <div class="contact-item">
+            <span class="icon">✉</span>
+            <a href="/cdn-cgi/l/email-protection#640608050f013b080310020d100a011717240c0b1009050d084a070b09"><span class="__cf_email__" data-cfemail="83e1efe2e8e6dcefe4f7e5eaf7ede6f0f0c3ebecf7eee2eaefade0ecee">[email&#160;protected]</span></a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span style="color:var(--grey-text)">Brisbane, Queensland, Australia</span>
+          </div>
+          <div class="social-links">
+            <a href="https://www.instagram.com/blake_lgtfitness/" target="_blank" class="social-link" aria-label="Instagram">📷</a>
+            <a href="https://www.facebook.com/profile.php?id=100064279051897" target="_blank" class="social-link" aria-label="Facebook">f</a>
+          </div>
+        </div>
+      </div>
+      <div class="apply-form reveal reveal-delay-1" id="applicationForm">
+        <div class="form-title">APPLICATION FORM</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="04XX XXX XXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" placeholder="Your age" min="16" max="99">
+        </div>
+        <div class="form-group">
+          <label for="service">Interested In</label>
+          <select id="service">
+            <option value="" disabled selected>Select a service</option>
+            <option value="coaching_nutrition">Online Coaching + Nutrition — $89.95/week</option>
+            <option value="coaching">Online Coaching — $69.95/week</option>
+            <option value="standard_monthly">Standard (Self-Guided) — $50/month</option>
+            <option value="standard_annual">Standard (Self-Guided) — $500/year</option>
+            <option value="unsure">Not Sure Yet — Need Guidance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="goals">Your Goals &amp; Current Situation</label>
+          <textarea id="goals" placeholder="Tell me about your goals, current fitness level, any injuries or conditions, and what you're hoping to achieve. The more detail, the better!"></textarea>
+        </div>
+        <button type="button" class="form-submit" onclick="handleFormSubmit()">SUBMIT APPLICATION →</button>
+        <p id="formSuccess" style="display:none; margin-top:16px; color:var(--amber); font-size:14px; text-align:center;">✓ Application submitted! Blake will be in touch within 24-48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-lgt">LGT</span><span class="logo-dot"></span><span class="logo-fitness">FITNESS</span></div>
+        <p class="footer-desc">Lose · Gain · Transform. Brisbane-based online coaching and sports nutrition with Blake McKenzie. Real coaching. Real results. Zero BS.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="https://www.instagram.com/blake_lgtfitness/" target="_blank" class="social-link" aria-label="Instagram">📷</a>
+          <a href="https://www.facebook.com/profile.php?id=100064279051897" target="_blank" class="social-link" aria-label="Facebook">f</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">NAVIGATE</div>
+        <ul class="footer-links">
+          <li><a href="#about">About Blake</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#coaching">Coaching Plans</a></li>
+          <li><a href="#app">LGT App</a></li>
+          <li><a href="#results">Client Results</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">CONTACT</div>
+        <ul class="footer-links">
+          <li><a href="#apply">Apply Now</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#9ffdf3fef4fac0f3f8ebf9f6ebf1faececdff7f0ebf2fef6f3b1fcf0f2">Email Blake</a></li>
+          <li><a href="https://www.instagram.com/blake_lgtfitness/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100064279051897" target="_blank">Facebook</a></li>
+          <li><a href="https://lgtfitness.programs.app/" target="_blank">LGT App</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 LGT Fitness. All rights reserved.</span>
+      <span>Built with purpose in Brisbane, Australia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Navigation ──
+const nav = document.getElementById('nav');
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+});
+
+function closeNav() {
+  navToggle.classList.remove('active');
+  navLinks.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Scroll Reveal ──
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ── Smooth scroll for all anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// ── Stripe Checkout Integration ──
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  STRIPE CONFIGURATION — Blake needs to replace these with  ║
+// ║  his real Stripe publishable key and Price IDs from the     ║
+// ║  Stripe Dashboard (dashboard.stripe.com)                    ║
+// ║                                                              ║
+// ║  Steps to set up:                                            ║
+// ║  1. Create a Stripe account at stripe.com                    ║
+// ║  2. In Dashboard > Products, create products for:            ║
+// ║     - Premium Weekly ($70 AUD recurring/week)                ║
+// ║     - Standard Weekly ($62 AUD recurring/week)               ║
+// ║     - Setup Fee ($100 AUD one-time + 1.7% Stripe fee)         ║
+// ║  3. Copy each product's Price ID (starts with price_...)     ║
+// ║  4. Copy your Publishable Key from Developers > API keys     ║
+// ║  5. Replace the values below                                 ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const STRIPE_CONFIG = {
+  publishableKey: 'pk_test_51T8zcdLpTRt8FyuDzsEjnnnRXx1hRChobCWw8Wk2m2PB1PLoYCDQrP8wqomYi3YE7masgJQTM9ywmB4TS5Io95mf00O0FhzvWb',
+  priceIds: {
+    coaching_weekly:           'price_1T8zf1LpTRt8FyuDqjnc4MCW',
+    coaching_nutrition_weekly: 'price_1T8zfhLpTRt8FyuDJtob1ZqS',
+    standard_monthly:          'APP_MANAGED',
+    standard_annual:           'APP_MANAGED',
+  },
+  successUrl: window.location.origin + '?payment=success',
+  cancelUrl:  window.location.origin + '?payment=cancelled',
+};
+
+// ── Billing Toggle for Standard plan ──
+function switchBilling(type) {
+  document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.toggle-btn[data-billing="${type}"]`).classList.add('active');
+  
+  const dollar = document.getElementById('standardDollar');
+  const period = document.getElementById('standardPeriod');
+  const note = document.getElementById('standardNote');
+  const commitment = document.getElementById('standardCommitment');
+
+  if (type === 'annual') {
+    dollar.textContent = '$500';
+    period.textContent = 'AUD / year';
+    note.textContent = '$41.67/mo · 3 days free trial';
+    commitment.textContent = '$500 AUD billed annually';
+  } else {
+    dollar.textContent = '$50';
+    period.textContent = 'AUD / month';
+    note.textContent = 'Cancel anytime · 3 days free trial';
+    commitment.textContent = '$50 AUD billed monthly';
+  }
+}
+
+function handleStripeCheckout(planKey) {
+  const priceId = STRIPE_CONFIG.priceIds[planKey];
+  
+  // Check if Stripe is configured
+  if (priceId.includes('REPLACE')) {
+    alert(
+      'Stripe payments are being set up! In the meantime, please submit an application below and Blake will send you a payment link directly.\n\nOr email: blake_lgtfitness@hotmail.com'
+    );
+    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  // Standard plans are managed through the LGT app
+  if (priceId === 'APP_MANAGED') {
+    alert(
+      'Self-Guided Standard subscriptions are managed through the LGT Training App.\n\nSubmit an application below and Blake will get you set up!'
+    );
+    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  try {
+    const stripe = Stripe(STRIPE_CONFIG.publishableKey);
+    
+    // For recurring (subscription) payments
+    const isRecurring = true; // All plans are now subscriptions
+    
+    stripe.redirectToCheckout({
+      lineItems: [{ price: priceId, quantity: 1 }],
+      mode: isRecurring ? 'subscription' : 'payment',
+      successUrl: STRIPE_CONFIG.successUrl,
+      cancelUrl: STRIPE_CONFIG.cancelUrl,
+    }).then(function(result) {
+      if (result.error) {
+        alert('Payment error: ' + result.error.message);
+      }
+    });
+  } catch (err) {
+    alert('Unable to initialize payment. Please contact Blake directly at blake_lgtfitness@hotmail.com');
+  }
+}
+
+// ── Check for payment result in URL ──
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('payment') === 'success') {
+  setTimeout(() => {
+    alert('🎉 Payment successful! Welcome to LGT Fitness. Blake will be in touch within 24 hours to get you started.');
+    window.history.replaceState({}, '', window.location.pathname);
+  }, 500);
+}
+
+// ── Email Signup ──
+function handleEmailSignup() {
+  const email = document.getElementById('emailInput').value;
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  // In production, connect this to your email service (Mailchimp, ConvertKit, etc.)
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailSuccess').style.display = 'block';
+}
+
+// ── Form Submit ──
+function handleFormSubmit() {
+  const firstName = document.getElementById('firstName').value;
+  const email = document.getElementById('email').value;
+  const service = document.getElementById('service').value;
+  const goals = document.getElementById('goals').value;
+  
+  if (!firstName || !email || !service || !goals) {
+    alert('Please fill out all required fields (Name, Email, Service, and Goals).');
+    return;
+  }
+  
+  // In production, connect this to your backend/email service
+  // For now, construct a mailto link as fallback
+  const subject = encodeURIComponent(`LGT Fitness Application — ${firstName}`);
+  const body = encodeURIComponent(
+    `Name: ${firstName} ${document.getElementById('lastName').value}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${document.getElementById('phone').value}\n`
