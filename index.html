@@ -1748,14 +1748,14 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 /* ═══════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════ */
-.reveal {
+.js-enabled .reveal {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.visible {
+.js-enabled .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -2489,7 +2489,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
         <div class="apply-contact-info">
           <div class="contact-item">
             <span class="icon">✉</span>
-            <a href="/cdn-cgi/l/email-protection#640608050f013b080310020d100a011717240c0b1009050d084a070b09"><span class="__cf_email__" data-cfemail="83e1efe2e8e6dcefe4f7e5eaf7ede6f0f0c3ebecf7eee2eaefade0ecee">[email&#160;protected]</span></a>
+            <a href="mailto:blake_lgtfitness@hotmail.com">blake_lgtfitness@hotmail.com</a>
           </div>
           <div class="contact-item">
             <span class="icon">📍</span>
@@ -2577,7 +2577,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
         <div class="footer-heading">CONTACT</div>
         <ul class="footer-links">
           <li><a href="#apply">Apply Now</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#9ffdf3fef4fac0f3f8ebf9f6ebf1faececdff7f0ebf2fef6f3b1fcf0f2">Email Blake</a></li>
+          <li><a href="mailto:blake_lgtfitness@hotmail.com">Email Blake</a></li>
           <li><a href="https://www.instagram.com/blake_lgtfitness/" target="_blank">Instagram</a></li>
           <li><a href="https://www.facebook.com/profile.php?id=100064279051897" target="_blank">Facebook</a></li>
           <li><a href="https://lgtfitness.programs.app/" target="_blank">LGT App</a></li>
@@ -2594,7 +2594,8 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 <!-- ═══════════════════════════════════════════
      SCRIPTS
      ═══════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+document.body.classList.add('js-enabled');
 // ── Navigation ──
 const nav = document.getElementById('nav');
 const navToggle = document.getElementById('navToggle');
