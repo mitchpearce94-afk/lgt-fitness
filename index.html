@@ -74,14 +74,13 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   height: var(--nav-height);
   display: flex;
   align-items: center;
-  transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+  background: #0a0a0a;
+  transition: box-shadow 0.4s;
 }
 
 .nav.scrolled {
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+  background: #0a0a0a;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
 }
 
 .nav .container {
@@ -2071,7 +2070,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
           <li><span class="check">✦</span> Direct coach support via WhatsApp</li>
           <li><span class="check">✦</span> Client education series &amp; resources</li>
         </ul>
-        <a href="#apply" class="btn-outline" style="width:100%;justify-content:center;">APPLY NOW</a>
+        <button onclick="handleStripeCheckout('coaching_weekly')" class="btn-outline" style="width:100%;justify-content:center;">GET STARTED</button>
         <div class="price-commitment">12 week minimum commitment</div>
       </div>
 
@@ -2095,7 +2094,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
           <li><span class="check">✦</span> Food swaps &amp; supplement protocols</li>
           <li><span class="check">✦</span> Fluid &amp; step targets</li>
         </ul>
-        <a href="#apply" class="btn-primary" style="width:100%;justify-content:center;"><span>APPLY NOW</span></a>
+        <button onclick="handleStripeCheckout('coaching_nutrition_weekly')" class="btn-primary" style="width:100%;justify-content:center;"><span>GET STARTED</span></button>
         <div class="price-commitment">12 week minimum commitment</div>
       </div>
 
@@ -2290,8 +2289,8 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
             <tr class="comparison-cta-row">
               <td></td>
               <td><a href="https://lgtfitness.programs.app/" target="_blank" class="btn-outline" style="font-size:11px;padding:12px 16px;">FREE TRIAL</a></td>
-              <td><a href="#apply" class="btn-outline" style="font-size:11px;padding:12px 16px;">APPLY</a></td>
-              <td class="featured-col"><a href="#apply" class="btn-primary" style="font-size:11px;padding:12px 16px;"><span>APPLY</span></a></td>
+              <td><button onclick="handleStripeCheckout('coaching_weekly')" class="btn-outline" style="font-size:11px;padding:12px 16px;">GET STARTED</button></td>
+              <td class="featured-col"><button onclick="handleStripeCheckout('coaching_nutrition_weekly')" class="btn-primary" style="font-size:11px;padding:12px 16px;"><span>GET STARTED</span></button></td>
             </tr>
           </tbody>
         </table>
@@ -2489,7 +2488,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
         <div class="apply-contact-info">
           <div class="contact-item">
             <span class="icon">✉</span>
-            <a href="mailto:blake_lgtfitness@hotmail.com">blake_lgtfitness@hotmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#ceaca2afa5ab91a2a9baa8a7baa0abbdbd8ea6a1baa3afa7a2e0ada1a3"><span class="__cf_email__" data-cfemail="93f1fff2f8f6ccfff4e7f5fae7fdf6e0e0d3fbfce7fef2faffbdf0fcfe">[email&#160;protected]</span></a>
           </div>
           <div class="contact-item">
             <span class="icon">📍</span>
@@ -2577,7 +2576,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
         <div class="footer-heading">CONTACT</div>
         <ul class="footer-links">
           <li><a href="#apply">Apply Now</a></li>
-          <li><a href="mailto:blake_lgtfitness@hotmail.com">Email Blake</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#6d0f010c060832010a190b041903081e1e2d050219000c0401430e0200">Email Blake</a></li>
           <li><a href="https://www.instagram.com/blake_lgtfitness/" target="_blank">Instagram</a></li>
           <li><a href="https://www.facebook.com/profile.php?id=100064279051897" target="_blank">Facebook</a></li>
           <li><a href="https://lgtfitness.programs.app/" target="_blank">LGT App</a></li>
@@ -2594,7 +2593,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 <!-- ═══════════════════════════════════════════
      SCRIPTS
      ═══════════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 document.body.classList.add('js-enabled');
 // ── Navigation ──
 const nav = document.getElementById('nav');
@@ -2769,9 +2768,4 @@ function handleFormSubmit() {
   }
   
   // In production, connect this to your backend/email service
-  // For now, construct a mailto link as fallback
-  const subject = encodeURIComponent(`LGT Fitness Application — ${firstName}`);
-  const body = encodeURIComponent(
-    `Name: ${firstName} ${document.getElementById('lastName').value}\n` +
-    `Email: ${email}\n` +
-    `Phone: ${document.getElementById('phone').value}\n`
+  // For no
