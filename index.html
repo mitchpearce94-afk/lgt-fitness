@@ -2776,6 +2776,54 @@ function handleEmailSignup() {
 
 // ── Form Submit ──
 function handleFormSubmit() {
-  const firstName = document.getElementById('firstName').value;
-  const email = document.getElementById('email').value;
-  const service = document.getElement
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const age = document.getElementById('age').value.trim();
+  const service = document.getElementById('service').value;
+  const goals = document.getElementById('goals').value.trim();
+
+  if (!firstName || !email || !email.includes('@') || !service) {
+    alert('Please fill in at least your name, email, and select a service.');
+    return;
+  }
+
+  const submitBtn = document.querySelector('.form-submit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'SUBMITTING...';
+
+  const formData = new FormData();
+  formData.append('name', firstName + ' ' + lastName);
+  formData.append('email', email);
+  formData.append('phone', phone || 'Not provided');
+  formData.append('age', age || 'Not provided');
+  formData.append('service', service);
+  formData.append('message', goals || 'No details provided');
+  formData.append('_subject', 'New LGT Fitness Application from ' + firstName);
+  formData.append('_template', 'table');
+
+  fetch('https://formsubmit.co/ajax/coach.lgtfitness@gmail.com', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('applicationForm').style.opacity = '0.5';
+      document.getElementById('formSuccess').style.display = 'block';
+      submitBtn.textContent = 'SUBMITTED ✓';
+    } else {
+      throw new Error('Submission failed');
+    }
+  })
+  .catch(() => {
+    alert('Something went wrong. Please try again or email coach.lgtfitness@gmail.com directly.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SUBMIT APPLICATION →';
+  });
+}
+
+</script>
+</body>
+</html>
