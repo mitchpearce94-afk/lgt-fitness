@@ -95,20 +95,24 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ error: "Failed to send email" });
     }
 
-    // Notify Blake of new lead (fire and forget)
-    fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [NOTIFY_EMAIL],
-        subject: `New guide download: ${email}`,
-        html: `<p>Someone downloaded the free nutrition guides.</p><p><strong>Email:</strong> ${email}</p><p><strong>Time:</strong> ${new Date().toLocaleString("en-AU", { timeZone: "Australia/Brisbane" })}</p>`,
-      }),
-    }).catch(() => {});
+    // Notify Blake of new lead
+    try {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: [NOTIFY_EMAIL],
+          subject: `New guide download: ${email}`,
+          html: `<p>Someone downloaded the free nutrition guides.</p><p><strong>Email:</strong> ${email}</p><p><strong>Time:</strong> ${new Date().toLocaleString("en-AU", { timeZone: "Australia/Brisbane" })}</p>`,
+        }),
+      });
+    } catch (e) {
+      console.error("Notification failed:", e);
+    }
 
     return res.status(200).json({ success: true });
   } catch (err) {
