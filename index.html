@@ -2769,14 +2769,35 @@ if (urlParams.get('payment') === 'success') {
 
 // ── Email Signup ──
 function handleEmailSignup() {
-  const email = document.getElementById('emailInput').value;
+  const email = document.getElementById('emailInput').value.trim();
   if (!email || !email.includes('@')) {
     alert('Please enter a valid email address.');
     return;
   }
-  // In production, connect this to your email service (Mailchimp, ConvertKit, etc.)
-  document.getElementById('emailForm').style.display = 'none';
-  document.getElementById('emailSuccess').style.display = 'block';
+
+  const btn = document.querySelector('#emailForm button');
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  fetch('/api/send-guides', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('emailForm').style.display = 'none';
+      document.getElementById('emailSuccess').style.display = 'block';
+    } else {
+      throw new Error(data.error || 'Failed');
+    }
+  })
+  .catch(() => {
+    alert('Something went wrong. Please try again or email coach.lgtfitness@gmail.com for the guides.');
+    btn.disabled = false;
+    btn.textContent = 'GET FREE ACCESS';
+  });
 }
 
 // ── Form Submit ──
